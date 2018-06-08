@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/ColorPrimary"
+    app:title="@string/app_name"
+    android:elevation="2dp"
+    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Button
+        android:id="@+id/high_rated_gifs"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/button_background"
+        android:padding="5dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="5dp"
+        android:text="High Rated gifs"/>
+
+
+</android.support.v7.widget.Toolbar>

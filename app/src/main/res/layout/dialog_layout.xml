@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/dialog_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/dialog_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/CustomTextViewBold"
+        android:text="@string/dialog_lable"
+        android:layout_below="@+id/dialog_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <RatingBar
+        android:id="@+id/dialog_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:layout_below="@+id/dialog_label"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_ratingbar"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_btn_submit_label"
+            android:background="@drawable/button_background"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/dialog_btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_btn_close_label"
+            android:background="@drawable/button_background"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

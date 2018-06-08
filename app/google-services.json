@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "956257244220",
+    "firebase_url": "https://soapboxassignment.firebaseio.com",
+    "project_id": "soapboxassignment",
+    "storage_bucket": "soapboxassignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956257244220:android:492b00ece5270d0c",
+        "android_client_info": {
+          "package_name": "soapbox.soapboxassignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956257244220-3451cu4t16kdtkc0jp6di5qqj130v5p4.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "956257244220-3451cu4t16kdtkc0jp6di5qqj130v5p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqdlSgyyGwRtVH0_pYDxvnJbTTOaX9dzI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

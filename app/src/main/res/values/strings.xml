@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SoapboxAssignment</string>
+    <string name="btn_search_label">Search</string>
+    <string name="edittext_search_hint">Enter Tagname to search</string>
+    <string name="giphy_api_key">BmeyIk0f5P589qidkPtzp5hd8kQ2IU88</string>
+    <string name="dialog_lable">Gif Title</string>
+
+    <string name="dialog_btn_submit_label">Submit</string>
+    <string name="dialog_btn_close_label">Close</string>
+
+</resources>
