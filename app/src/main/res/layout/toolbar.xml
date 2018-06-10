@@ -17,7 +17,6 @@
         android:padding="5dp"
         android:layout_gravity="right"
         android:layout_marginRight="5dp"
-        android:text="High Rated gifs"/>
-
+        android:text="@string/dialog_list_layout_title"/>
 
 </android.support.v7.widget.Toolbar>

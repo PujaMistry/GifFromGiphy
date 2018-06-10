@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,7 +24,9 @@ import butterknife.OnClick;
 import soapbox.soapboxassignment.Model.GifItems;
 import soapbox.soapboxassignment.Presenter.PresenterImpl;
 import soapbox.soapboxassignment.Presenter.PresenterInterface;
-import soapbox.soapboxassignment.Utils.CustomAdapter;
+import soapbox.soapboxassignment.Utils.GridSpacingItemDecoration;
+import soapbox.soapboxassignment.Utils.PaginationAdapter;
+import soapbox.soapboxassignment.Utils.PaginationScrollListener;
 import soapbox.soapboxassignment.Utils.RecycleTouchListener;
 import soapbox.soapboxassignment.View.MainView;
 
@@ -41,7 +45,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     Toolbar toolbar;
 
     private PresenterInterface presenter;
-    private CustomAdapter adapter;
+    private PaginationAdapter adapter;
+
+    private boolean isLoading = false;
+    private int offset = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter = new PresenterImpl(MainActivity.this, this);
         presenter.onCreate();
 
+        adapter = new PaginationAdapter(this);
         editTextSearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -69,24 +77,45 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
         });
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(getResources(), 2, 10, true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecycleTouchListener(getApplicationContext(), new RecycleTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                if(!adapter.isRating())
-                    presenter.onItemClicked(position);
+                presenter.onItemClicked(adapter.getItem(position));
             }
         }));
+
+        recyclerView.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
+
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                Log.d("offset", "" + offset);
+                presenter.onLoadNextPage(offset);
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
     }
 
     @OnClick(R.id.btn_search)
     public void search() {
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        offset = 0;
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(editTextSearch.getWindowToken(), 0);
-        tagName = editTextSearch.getText().toString();
-        if(tagName != null)
-            presenter.onSearchButtonClicked(tagName);
+        tagName = editTextSearch.getText().toString().trim();
+        if (tagName != null) {
+            Log.d("on search", "" + offset);
+            adapter.clear();
+            presenter.onSearchButtonClicked(tagName, offset);
+        }
     }
 
     @Override
@@ -103,7 +132,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void setItems(List<GifItems> items) {
-        setAdapter(items, false);
+        adapter.addAll(items);
+        adapter.addLoadingFooter();
+        offset+=6;
+    }
+
+    @Override
+    public void loadNextPage(List<GifItems> items) {
+        adapter.removeLoadingFooter();
+        isLoading = false;
+        adapter.addAll(items);
+        adapter.addLoadingFooter();
+        offset+=6;
     }
 
     @Override
@@ -115,16 +155,5 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void dismissDialog(Dialog dialog) {
         dialog.dismiss();
     }
-
-    @Override
-    public void showHighRatedGifs(List<GifItems> items) {
-        setAdapter(items, true);
-    }
-
-    private void setAdapter(List<GifItems> items, boolean isRatings) {
-        if(adapter == null)
-            adapter = new CustomAdapter(getApplicationContext());
-        adapter.setGifItems(items, isRatings);
-        recyclerView.setAdapter(adapter);
-    }
 }
+

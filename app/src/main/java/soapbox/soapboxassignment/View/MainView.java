@@ -14,9 +14,9 @@ public interface MainView {
 
     void setItems(List<GifItems> items);
 
+    void loadNextPage(List<GifItems> items);
+
     void showDialog(Dialog dialog);
 
     void dismissDialog(Dialog dialog);
-
-    void showHighRatedGifs(List<GifItems> items);
 }

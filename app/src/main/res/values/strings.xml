@@ -7,5 +7,6 @@
 
     <string name="dialog_btn_submit_label">Submit</string>
     <string name="dialog_btn_close_label">Close</string>
+    <string name="dialog_list_layout_title">High Rated GIFS</string>
 
 </resources>

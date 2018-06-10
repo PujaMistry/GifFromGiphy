@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:layout_marginTop="15dp"
-    android:padding="10dp"
     android:background="@drawable/list_row_background"
+    android:padding="10dp"
+    android:gravity="center"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin_half"
         app:cardBackgroundColor="@color/placeholder_grey"
         app:cardCornerRadius="3dp"
         app:cardPreventCornerOverlap="false"
-        android:id="@+id/cardView">
+        android:id="@+id/cardView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true">
 
         <ProgressBar
-            android:id="@+id/gif_progress"
+            android:id="@+id/dialog_list_progress"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="@dimen/activity_margin"
             android:layout_height="@dimen/activity_margin"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:theme="@style/CircularProgress"/>
+            android:theme="@style/CircularProgress" />
 
         <ImageView
-            android:id="@+id/gif_imageView"
-            android:layout_width="@dimen/poster_thumb_width"
-            android:layout_height="@dimen/poster_thumb_height"/>
+            android:id="@+id/dialog_list_imageView"
+            android:layout_width="150dp"
+            android:layout_height="100dp"/>
 
     </android.support.v7.widget.CardView>
 
     <RatingBar
-        android:id="@+id/ratinbar"
+        android:id="@+id/dialog_list_ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_alignBottom="@+id/cardView"
-        android:layout_alignParentEnd="true" />
+        android:numStars="5"/>
 
-</RelativeLayout>
+</LinearLayout>

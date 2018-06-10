@@ -10,7 +10,9 @@ public class GifItems {
     @SerializedName("url")
     @Expose
     private String url;
-    private Float gifRating;
+    @SerializedName("images")
+    @Expose
+    private Images images;
     @SerializedName("title")
     @Expose
     private String title;
@@ -31,12 +33,12 @@ public class GifItems {
         this.url = url;
     }
 
-    public Float getRating() {
-        return gifRating;
+    public Images getImages() {
+        return images;
     }
 
-    public void setRating(Float rating) {
-        this.gifRating = rating;
+    public void setImages(Images images) {
+        this.images = images;
     }
 
     public String getTitle() {
